@@ -1,6 +1,10 @@
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+/**
+ * @author diego leiva
+ * @author pablo orellana
+ */
 public class DriverProgram {
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -10,12 +14,16 @@ public class DriverProgram {
 
         int option=0;
 
+        //Mensaje de bienvenida
         System.out.println("===================================================================");
         System.out.println("|                      Bienvenido a la Radio                      |");
         System.out.println("|     Navega en nuestro sistema mientras disfrutas de tu viaje    |");
         System.out.println("===================================================================");
         boolean go = true;
+
+        //Ciclo que permite que el usuario seleccione diferentes opciones
         while (go) {
+            //Menu de opciones
             System.out.println("===================================================================");
             System.out.println("|               Ingrese la opcion que desea ejecutar                |");
             System.out.println("|                                                                   |");
@@ -27,6 +35,7 @@ public class DriverProgram {
             System.out.println("| [6.]  Salir                                                       |");
             System.out.println("===================================================================");
             boolean done = false;
+            //Ciclo que evita que el usuario ingrese un valor no numerico
             while (!done) {
                 try {
                     option = input.nextInt();
@@ -37,13 +46,13 @@ public class DriverProgram {
                 }
             }
             switch (option) {
-                case 1:
+                case 1://Opcion de encendido apagado
                     if (controlador.isOn()) {
                         controlador.off();
                     } else if (!controlador.isOn())
                         controlador.on();
                     break;
-                case 2:
+                case 2://Opcion de cambio de estacion AM / FM
                     System.out.println("Que estación desea escuchar?");
                     System.out.println("AM");
                     System.out.println("FM");
@@ -55,8 +64,7 @@ public class DriverProgram {
                     }
                     break;
 
-                case 3:
-
+                case 3://Opcion de cambio de frecuencia, despliega menu de adelante o atras
                     String next;
                     boolean flag = false;
                     while (!flag){
@@ -81,7 +89,7 @@ public class DriverProgram {
                         }
                     }
                     break;
-                case 4:
+                case 4://Opcion que permite guardar una frecuencia AM o FM en alguno de los 12 espacios disponibles
                     if (controlador.getFrequence().equals("AM")){
                         System.out.println("La frecuencia actual AM es:  "+controlador.getAMActualStation());
 
@@ -119,7 +127,7 @@ public class DriverProgram {
                         controlador.saveFMStation(controlador.getFMActualStation(),fav);
                     }
                     break;
-                case 5:
+                case 5://Opcion que permite al usuario cargar la frecuencia guardada en el espacio que seleccione
                     if (controlador.getFrequence().equals("AM")){
                         System.out.println("Ingrese el número favorito para cargar la estacion guardada");
                         System.out.println("                Espacios favoritos");
@@ -158,7 +166,7 @@ public class DriverProgram {
                                 System.out.println("La frecuencia guardada AM es: " + df.format(controlador.getFMSlot(slot)));}
                     }
                     break;
-                case 6:
+                case 6://Opcion que permite que el usuario salga del programa
                     System.out.println("Ha salido del programa");
                     go = false;
                     break;
