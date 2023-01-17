@@ -43,6 +43,44 @@ public class DriverProgram {
                     } else if (!controlador.isOn())
                         controlador.on();
                     break;
+                case 2:
+                    System.out.println("Que estación desea escuchar?");
+                    System.out.println("AM");
+                    System.out.println("FM");
+                    String ans = input.next().toLowerCase();
+                    try {
+                        controlador.setFrequence(ans);
+                    }catch (Exception ex){
+                        System.out.println("ERROR, Estación invalida");
+                    }
+                    break;
+
+                case 3:
+
+                    String next;
+                    boolean flag = false;
+                    while (!flag){
+                        System.out.println("Para salir escriba presione cualquier letra");
+                        System.out.println("[ Frecuencia ] ");
+                        if (controlador.getFrequence().equals("AM")){
+                            System.out.println("-  "+controlador.getAMActualStation()+"  +");
+                            next = input.next();
+                            if (next.equals("+")){
+                                controlador.Forward();
+                            }else if (next.equals("-")){
+                                controlador.Backward();
+                            }else if (!next.equals("+")||!next.equals("-"))  flag = true;
+                        }else if (controlador.getFrequence().equals("FM")){
+                            System.out.printf("-  "+df.format(controlador.getFMActualStation())+"  +");
+                            next = input.next();
+                            if (next.equals("+")){
+                                controlador.Forward();
+                            }else if (next.equals("-")){
+                                controlador.Backward();
+                            } else if (!next.equals("+")||!next.equals("-")) flag = true;
+                        }
+                    }
+                    break;
                 case 6:
                     System.out.println("Ha salido del programa");
                     go = false;
