@@ -81,6 +81,83 @@ public class DriverProgram {
                         }
                     }
                     break;
+                case 4:
+                    if (controlador.getFrequence().equals("AM")){
+                        System.out.println("La frecuencia actual AM es:  "+controlador.getAMActualStation());
+
+                        System.out.println("Ingrese el número donde desea guardar la estacion");
+                        System.out.println("                Espacios favoritos");
+                        System.out.println("[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]");
+                        int fav=0;
+                        boolean exist = false;
+                        while (!exist){
+                            try {
+                                fav = input.nextInt();
+                                exist = true;
+                            }catch (Exception e){
+                                System.out.println("ERROR, Ingrese una opcion válida");
+                                input.next();
+                            }
+                        }
+                        controlador.saveAMStation(controlador.getAMActualStation(),fav);
+                    }else if (controlador.getFrequence().equals("FM")){
+                        System.out.println("La frecuencia actual FM es:  "+df.format(controlador.getFMActualStation()));
+                        System.out.println("Ingrese el número donde desea guardar la estacion");
+                        System.out.println("                Espacios favoritos");
+                        System.out.println("[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]");
+                        int fav=0;
+                        boolean exist = false;
+                        while (!exist){
+                            try {
+                                fav = input.nextInt();
+                                exist = true;
+                            }catch (Exception e){
+                                System.out.println("ERROR, Ingrese una opcion válida");
+                                input.next();
+                            }
+                        }
+                        controlador.saveFMStation(controlador.getFMActualStation(),fav);
+                    }
+                    break;
+                case 5:
+                    if (controlador.getFrequence().equals("AM")){
+                        System.out.println("Ingrese el número favorito para cargar la estacion guardada");
+                        System.out.println("                Espacios favoritos");
+                        System.out.println("[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]");
+                        int space=0;
+                        boolean oks = false;
+                        while (!oks){
+                            try {
+                                space = input.nextInt();
+                                oks = true;
+                            }catch (Exception e){
+                                System.out.println("ERROR, Ingrese una opcion válida");
+                                input.next();
+                            }
+                            if (controlador.getAMSlot(space)==0){
+                                System.out.println("Espacio vacio");
+                            }else System.out.println("La frecuencia guardada AM es: "+controlador.getAMSlot(space));
+                        }
+                    }else if (controlador.getFrequence().equals("FM")){
+                        System.out.println("Ingrese el número favorito para cargar la estacion guardada");
+                        System.out.println("                Espacios favoritos");
+                        System.out.println("[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]");
+                        int slot=0;
+                        boolean good = false;
+                        while (!good) {
+                            try {
+                                slot = input.nextInt();
+                                good = true;
+                            } catch (Exception e) {
+                                System.out.println("ERROR, Ingrese una opcion válida");
+                                input.next();
+                            }
+                            if (controlador.getFMSlot(slot) == 0) {
+                                System.out.println("Espacio vacio");
+                            } else
+                                System.out.println("La frecuencia guardada AM es: " + df.format(controlador.getFMSlot(slot)));}
+                    }
+                    break;
                 case 6:
                     System.out.println("Ha salido del programa");
                     go = false;
